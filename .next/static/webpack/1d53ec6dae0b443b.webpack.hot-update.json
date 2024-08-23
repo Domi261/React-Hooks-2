@@ -1,0 +1,1 @@
+{"c":["pages/index","webpack"],"r":["pages/posts/[id]/comments"],"m":["./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?absolutePagePath=C%3A%5CUsers%5CUek%20Lernender%201%5CDocuments%5Cauftrag-react-hooks%202%5Cpages%5Cposts%5C%5Bid%5D%5Ccomments.js&page=%2Fposts%2F%5Bid%5D%2Fcomments!","./node_modules/next/router.js","./pages/posts/[id]/comments.js"]}
