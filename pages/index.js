@@ -1,33 +1,30 @@
-import React from 'react';
-import ColoredCounter from '../components/ColoredCounter';
-import HogwartsHouse from '../components/HogwartsHouse';
-import Jokes from '../components/Jokes';
-import SearchList from '../components/SearchList';  
+import ColoredCounter from "../components/ColoredCounter"
+import CountdownTimer from "../components/CountdownTimer"
+import Jokes from "../components/Jokes"
+import SearchList from "../components/SearchList"
 
-const Home = () => {
-    
-    const names = ['Alice', 'Bob', 'Charlie', 'David', 'Eva'];
-
+export default function IndexPage() {
     return (
         <div>
-            <h1>Colored Counter</h1>
-            <ColoredCounter />
+            <h2>ColoredCounter</h2>
+            <ColoredCounter/>
+            
+            <h2>CountdownTimer</h2>
+            <CountdownTimer count={2}/>
+            
+            <h2>Jokes</h2>
+            <Jokes/>
 
-            <h1>Hogwarts Häuser</h1>
-            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <HogwartsHouse name="Gryffindor" />
-                <HogwartsHouse name="Hufflepuff" />
-                <HogwartsHouse name="Ravenclaw" />
-                <HogwartsHouse name="Slytherin" />
-            </div>
-
-            <h1>Suchliste</h1>
-            <SearchList names={names} /> { }
-
-            <h1>Chuck Norris Witz</h1>
-            <Jokes />
+            <h2>SearchList</h2>
+            <SearchList names={[
+                "Tony",
+                "Steve",
+                "Steven",
+                "Bruce",
+                "Clark", 
+                "Diana", 
+                "Cassandra"
+            ]}/>
         </div>
-    );
-};
-
-export default Home;
+    )
+}

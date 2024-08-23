@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from "react"
 
-const Jokes = () => {
-  const [joke, setJoke] = useState('');  
+export default function Jokes() {
+    const [joke, setJoke] = useState(null)
 
-  
-  const fetchJoke = async () => {
-    const response = await fetch('https://api.chucknorris.io/jokes/random');
-    const data = await response.json();
-    setJoke(data.value);  
-  };
+    async function loadJoke() {
+        const response = await fetch("https://api.chucknorris.io/jokes/random")
+        const newJoke = await response.json()
+        setJoke(newJoke)
+    }
 
+    useEffect(() => {
+        loadJoke()
+    }, [])
 
-
-  return (
-    <div>
-      <h1>Random Chuck Norris Joke</h1>
-      <p>{joke}</p>
-      <button onClick={fetchJoke}>Neuen Witz laden</button>
-    </div>
-  );
-};
-
-export default Jokes;  
+    return (
+        <div>
+            <button onClick={loadJoke}>Load a new joke</button>
+            { joke &&<p>{joke.value}</p> }
+        </div>
+    )
+}

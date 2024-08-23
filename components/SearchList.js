@@ -1,39 +1,34 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from "react"
 
-const SearchList = ({ names }) => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [filteredNames, setFilteredNames] = useState(names);
+export default function SearchList(props) {
+    const [query, setQuery] = useState("")
+    const [filteredNames, setFilteredNames] = useState([])
+    const [names, setNames] = useState([])
 
-    // Funktion zur Aktualisierung der Filterliste
-    const handleSearch = (event) => {
-        const value = event.target.value;
-        setSearchTerm(value);
+    useEffect(() => {
+        setNames(props.names)
+    }, [props.names])
 
-        if (value) {
-            // Filtert die Namen basierend auf dem Suchbegriff
-            const filtered = names.filter(name => name.toLowerCase().includes(value.toLowerCase()));
-            setFilteredNames(filtered);
+    useEffect(() => {
+        if(query) {
+            setFilteredNames(names.filter(name => name.toLowerCase().includes(query.toLowerCase())))
         } else {
-            // Zeigt die ursprüngliche Liste an, wenn das Eingabefeld leer ist
-            setFilteredNames(names);
+            setFilteredNames([])
         }
-    };
+    }, [query])
+
+    const handleChange = (e) => {
+        setQuery(e.target.value)
+    }
 
     return (
         <div>
-            <input
-                type="text"
-                value={searchTerm}
-                onChange={handleSearch}
-                placeholder="Search..."
-            />
+            <input type="text" placeholder="filter..." value={query} onChange={handleChange}/>
             <ul>
-                {filteredNames.map((name, index) => (
-                    <li key={index}>{name}</li>
-                ))}
+                {
+                    (filteredNames.length > 0 ? filteredNames : names).map(name => <li key={name}>{name}</li>)
+                }
             </ul>
         </div>
-    );
-};
-
-export default SearchList; 
+    )
+}

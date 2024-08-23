@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import styles from './ColoredCounter.module.css'; // Das Modul richtig importieren
+import { useState, useEffect } from "react"
 
 export default function ColoredCounter() {
-    const [count, setCount] = useState(0);
-    const [bgColor, setBgColor] = useState('#323');
-
-    const increment = () => {
-        setCount(count + 1);
-    };
+    const [count, setCount] = useState(0)
+    const [color, setColor] = useState("#FF0000")
 
     useEffect(() => {
-        if (count % 2 === 0) {
-            setBgColor('red');
+        if(count % 2 === 0) {
+            setColor("#FF0000")
         } else {
-            setBgColor('blue');
+            setColor("#0000FF")
         }
-    }, [count]);
+    }, [count])
 
     return (
-        <div className={styles.coloredCounter} style={{ backgroundColor: bgColor }}>
-            <button className={styles.button} onClick={increment}>Increase</button>
-            <span className={styles.counterSpan}> Count: {count} </span>
+        <div style={{background: color}}>
+            Count: {count}
+            <button onClick={(e) => setCount(count + 1)}>
+                Increment
+            </button>
         </div>
-    );
+    )
 }

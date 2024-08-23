@@ -1,37 +1,34 @@
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
- 
-const Posts = () => {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
- 
+import { useState, useEffect } from "react"
+import Link from "next/link"
+
+export default function PostsPage() {
+    const [posts, setPosts] = useState([])
+
     useEffect(() => {
-        const fetchPosts = async () => {
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-            const data = await response.json();
-            setPosts(data);
-            setLoading(false);
-        };
- 
-        fetchPosts();
-    }, []);
- 
-    if (loading) return <div>Laden...</div>;
- 
+        const loadPosts = async () => {
+            const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+            const posts = await response.json()
+            setPosts(posts)
+        }
+        loadPosts()
+    }, [])
+
     return (
         <div>
             <h1>Posts</h1>
             <ul>
-                {posts.map(post => (
-                    <li key={post.id}>
-                        <h2>{post.title}</h2>
-                        <p>{post.body}</p>
-                        <Link href={`/posts/${post.id}/comments`}>Kommentare anzeigen</Link>
-                    </li>
-                ))}
+                {
+                    posts.map(post => {
+                        return (
+                            <li>
+                                <h2>{post.title}</h2>
+                                <p>{post.body}</p>
+                                <Link href={`/posts/${post.id}/comments`}>Kommentare</Link>
+                            </li>
+                        )
+                    })
+                }
             </ul>
         </div>
-    );
-};
- 
-export default Posts;
+    )
+}
